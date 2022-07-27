@@ -34,49 +34,64 @@ class Comments extends StatelessWidget {
         comment: "I recommended Ice-Cream and Cookis ",
         image: AssetImage("assets/images/p2.jpg"),
         name: "Donia"),
-
   ];
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
-        child: Padding(
-          padding:EdgeInsets.symmetric(horizontal:11,),
-          child: ListView.separated(
-            itemBuilder: (context, index) => comments(comment: coments[index]),
-            separatorBuilder: (context, index) => SizedBox(height: 10,),
-            itemCount: coments.length,
+    return  SingleChildScrollView(
+      child: Center(
+        child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding:  EdgeInsets.all(11.0),
+                child: Text("Opinions",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color:Colors.grey[400])),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 11,
+                ),
+                child: ListView.separated(
+                  itemBuilder: (context, index) =>
+                      comments(comment: coments[index]),
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 10,
+                  ),shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: coments.length,
+                ),),
+            ],
           ),
-        ),
-      );
+      ),
+    );
   }
 
   Widget comments({required Comment comment}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         Padding(
           padding: EdgeInsets.all(8.0),
           child: Container(
             // padding: EdgeInsets.all(10),
             height: 100,
             decoration: BoxDecoration(
-                color: Color(0xffffffff),
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(45),
-                    topLeft: Radius.circular(45),
+              color: Color(0xffffffff),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(45),
+                topLeft: Radius.circular(45),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xcbffcddc),
+                  offset: Offset(1, 1),
+                  blurRadius: 3,
+                  spreadRadius: 1,
                 ),
-              boxShadow: [BoxShadow(
-                color:Color(0xcbffcddc),
-                offset: Offset(1,1),
-                blurRadius: 3,
-                spreadRadius: 1,
-              ),],
+              ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-
               children: [
                 CircleAvatar(
                   radius: 23.0,
@@ -86,7 +101,7 @@ class Comments extends StatelessWidget {
                   width: 13,
                 ),
                 Padding(
-                  padding:EdgeInsets.only(top:29),
+                  padding: EdgeInsets.only(top: 29),
                   child: Container(
                     width: 200,
                     child: Column(
@@ -111,7 +126,7 @@ class Comments extends StatelessWidget {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
